@@ -3,3 +3,20 @@ body {
   text-align: center;
 }
 
+.pomodoro-tasks {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 2.5rem;
+  margin-top: 30px;
+}
+
+.pomodoro-status {
+  display: flex;
+  gap: 2em;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px 15px;
+  border: 1px solid black;
+  border-radius: 30px;
+  margin: 40px 0px;
+}
