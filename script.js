@@ -1,14 +1,12 @@
 const timerDisplay = document.querySelector('.timerDisplay')
-const totalCycles = document.querySelector('.total-cycles')
+const currentCycle = document.querySelector('.current-cycle')
+const cyclesTotal = document.querySelector('.total-cycles')
 const startBtn = document.querySelector('.start-btn')
 const pauseBtn = document.querySelector('.pause-btn')
 const resetBtn = document.querySelector('.reset-btn')
 
 
 // POMODORO
-
-
-
 const defaultTimerSettings = {
   timer : 1,
   shortBreak : 5,
@@ -20,12 +18,15 @@ const defaultTimerSettings = {
 let timerInSeconds = defaultTimerSettings.timer * 60
 let shortBreakInSec = defaultTimerSettings.shortBreak * 60
 let longBreakInSec = defaultTimerSettings.longBreakBreak * 60
-
+let totalCycles = defaultTimerSettings.totalCycles
+let initialCycle = 1
 let minutes, seconds
 let isPaused, isReset = false
 
 
 countdownDisplay(timerInSeconds)
+currentCycle.innerHTML = initialCycle
+cyclesTotal.innerHTML = totalCycles
 
 function startTimer() {
   const interval = setInterval(() => {
