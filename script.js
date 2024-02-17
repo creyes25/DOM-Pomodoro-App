@@ -17,45 +17,57 @@ const defaultTimerSettings = {
   currentStatus : 'pomodoro'
 }
 
-let durationInSeconds = defaultTimerSettings.timer * 60
+let timerInSeconds = defaultTimerSettings.timer * 60
+let shortBreakInSec = defaultTimerSettings.shortBreak * 60
+let longBreakInSec = defaultTimerSettings.longBreakBreak * 60
+
 let minutes, seconds
-let isPaused = false
+let isPaused, isReset = false
 
 
-minutes = defaultTimerSettings.timer 
-seconds = (defaultTimerSettings.timer * 60) % 60
-
-countdownDisplay(minutes, seconds)
+countdownDisplay(timerInSeconds)
 
 function startTimer() {
-  
   const interval = setInterval(() => {
-    minutes = Math.floor(durationInSeconds / 60)
-    seconds = durationInSeconds % 60
     
     if(isPaused) {
       clearInterval(interval)
     }
+    
+    if(isReset) {
+      clearInterval(interval)
+      resetTimer()
+    }
 
-    countdownDisplay(minutes, seconds)
-    durationInSeconds--
+    countdownDisplay(timerInSeconds)
+    timerInSeconds--
     
-    
-    if (durationInSeconds < 0) {
-      durationInSeconds = 0
+    if (timerInSeconds < 0) {
+      timerInSeconds = 0
       clearInterval(interval)
       disableStartBtn(false)
     }
     
     
-  }, 100)
+    
+  }, 1000)
 }
 
-function countdownDisplay(min, sec) {
-  if (min < 10) min = '0' + minutes
-  if (sec < 10 && seconds >= 0) sec = '0' + sec
+function resetTimer() {
+  timerInSeconds = defaultTimerSettings.timer * 60
+  countdownDisplay(timerInSeconds)
+  isPaused, isReset = false
+
+}
+
+function countdownDisplay(timer) {
+  minutes = Math.floor(timer / 60)
+  seconds = timer % 60
+
+  if (minutes < 10) minutes = '0' + minutes
+  if (seconds < 10 && seconds >= 0) seconds = '0' + seconds
     
-  return timerDisplay.innerHTML = `${min}:${sec}`
+  return timerDisplay.innerHTML = `${minutes}:${seconds}`
 }
 
 function disableStartBtn(hasStarted) {
@@ -66,6 +78,10 @@ function disableStartBtn(hasStarted) {
   }
 }
 
+
+
+
+// POMODORO Event Listeners
 startBtn.addEventListener('click', (e) => {
   if(e) {
     disableStartBtn(true)
@@ -77,6 +93,15 @@ startBtn.addEventListener('click', (e) => {
 pauseBtn.addEventListener('click', () => {
   disableStartBtn(false)
   isPaused = true
+})
+
+resetBtn.addEventListener('click', ()=> {
+  isReset = true
+  disableStartBtn(false)
+  if(isPaused) {
+    console.log(isPaused)
+    resetTimer()
+  }
 })
 
 
