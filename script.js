@@ -43,13 +43,13 @@ function currentTimer() {
 }
 
 function startTimer() {
-
   if (initialCycle > totalCycles) {
     initialCycle = 1
     console.log('Youre done with all your cycles')
     alert('All Cycles are done!')
   } else {
     currentCycle.innerHTML = initialCycle
+
     const interval = setInterval(() => {
       if(isPaused) {
         clearInterval(interval)
@@ -69,7 +69,6 @@ function startTimer() {
         clearInterval(interval)
         disableStartBtn(false)
 
-        // can create a new function changeStatus
         if(currentStatus === 'pomodoro') {
           currentStatus = 'short'
           timer = currentTimer()
@@ -88,19 +87,18 @@ function startTimer() {
     }, 100)
 
   }
-
 }
 
 
 
 function resetTimer() {
-  timerInSeconds = defaultTimerSettings.timer * 60
-  countdownDisplay(timerInSeconds)
+  timer = currentTimer()
+  countdownDisplay(timer)
   isPaused, isReset = false
-
 }
 
 function countdownDisplay(timer) {
+  console.log(timer)
   minutes = Math.floor(timer / 60)
   seconds = timer % 60
 
