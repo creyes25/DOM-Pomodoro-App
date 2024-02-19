@@ -11,13 +11,13 @@ const defaultTimerSettings = {
   timer : 1,
   shortBreak : 2,
   longBreak : 3,
-  totalCycles: 2,
+  totalCycles: 1,
   currentStatus : 'pomodoro'
 }
 
-let timerInSeconds = defaultTimerSettings.timer * 60
-let shortBreakInSec = defaultTimerSettings.shortBreak * 60
-let longBreakInSec = defaultTimerSettings.longBreak * 60
+const timerInSeconds = defaultTimerSettings.timer * 60
+const shortBreakInSec = defaultTimerSettings.shortBreak * 60
+const longBreakInSec = defaultTimerSettings.longBreak * 60
 let totalCycles = defaultTimerSettings.totalCycles
 let currentStatus = defaultTimerSettings.currentStatus
 let initialCycle = 1
@@ -25,12 +25,14 @@ let minutes, seconds
 let isPaused, isReset = false
 let timer = currentTimer()
 
+function defaultTimerDisplay() {
+  totalCycles = defaultTimerSettings.totalCycles
+  countdownDisplay(timer)
+  currentCycle.innerHTML = initialCycle
+  cyclesTotal.innerHTML = totalCycles
+}
 
-
-
-countdownDisplay(timer)
-currentCycle.innerHTML = initialCycle
-cyclesTotal.innerHTML = totalCycles
+defaultTimerDisplay()
 
 function currentTimer() {
   if (currentStatus === 'pomodoro') {
@@ -44,12 +46,23 @@ function currentTimer() {
 
 function startTimer() {
   if (initialCycle > totalCycles) {
-    initialCycle = 1
-    console.log('Youre done with all your cycles')
-    alert('All Cycles are done!')
+    //! NOTE: check to see if this can be added to a function
+    let userHasCompletedTask = prompt('Did you finish your task?')
+    if(userHasCompletedTask === 'no') {
+      let increaseTotalCyclesBy = prompt('How many more cycle would you like to add?')
+      currentStatus = 'long'
+      totalCycles += parseInt(increaseTotalCyclesBy)
+      timer = currentTimer()
+      startTimer()
+    }else {
+      initialCycle = 1
+      defaultTimerDisplay()
+    }
+
   } else {
     currentCycle.innerHTML = initialCycle
-
+    cyclesTotal.innerHTML = totalCycles
+    
     const interval = setInterval(() => {
       if(isPaused) {
         clearInterval(interval)
@@ -62,8 +75,7 @@ function startTimer() {
   
       countdownDisplay(timer)
       timer--
-      
-      
+
       if (timer < 0) {
         isPaused = true
         clearInterval(interval)
@@ -74,17 +86,17 @@ function startTimer() {
           timer = currentTimer()
           startTimer()
         } else if (currentStatus === 'short') {
-          currentStatus = 'long'
-          timer = currentTimer()
-          startTimer()
-        } else if (currentStatus === 'long') {
           currentStatus = 'pomodoro'
           timer = currentTimer()
           initialCycle++
           startTimer()
+        } else if (currentStatus === 'long') {
+          currentStatus = 'pomodoro'
+          timer = currentTimer()
+          startTimer()
         }
       }
-    }, 100)
+    }, 50)
 
   }
 }
@@ -98,7 +110,6 @@ function resetTimer() {
 }
 
 function countdownDisplay(timer) {
-  console.log(timer)
   minutes = Math.floor(timer / 60)
   seconds = timer % 60
 
