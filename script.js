@@ -57,24 +57,12 @@ function startTimer() {
   statusDisplay(currentStatus)
 
   if (initialCycle > totalCycles) {
-    //! NOTE: check to see if this can be added to a function
-    let userHasCompletedTask = prompt('Did you finish your task?')
-    if(userHasCompletedTask === 'no') {
-      let increaseTotalCyclesBy = prompt('How many more cycle would you like to add?')
-      currentStatus = 'long'
-      totalCycles += parseInt(increaseTotalCyclesBy)
-      timer = currentTimer()
-      startTimer()
-    }else {
-      initialCycle = 1
-      defaultTimerDisplay()
-    }
+    finishOrContinueWorking()
 
   } else {
 
     const interval = setInterval(() => {
-      
-
+    
       if(isPaused) {
         clearInterval(interval)
       }
@@ -109,6 +97,20 @@ function startTimer() {
   }
 }
 
+// user decides whether to continue working on task or finish
+function finishOrContinueWorking() {
+  let userHasCompletedTask = prompt('Did you finish your task?')
+    if(userHasCompletedTask === 'no') {
+      let increaseTotalCyclesBy = prompt('How many more cycle would you like to add?')
+      currentStatus = 'long'
+      totalCycles += parseInt(increaseTotalCyclesBy)
+      timer = currentTimer()
+      startTimer()
+    }else {
+      initialCycle = 1
+      defaultTimerDisplay()
+    }
+}
 
 // resets the current status timer
 function resetTimer() {
