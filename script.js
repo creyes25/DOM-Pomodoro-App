@@ -7,7 +7,7 @@ const cyclesTotal = document.querySelector('.total-cycles')
 const startBtn = document.querySelector('.start-btn')
 const pauseBtn = document.querySelector('.pause-btn')
 const resetBtn = document.querySelector('.reset-btn')
-
+const currentTask = document.querySelector('.current-task')
 
 
 // POMODORO
@@ -175,10 +175,12 @@ function removeStatusStyling(...statuses) {
 
 // POMODORO Event Listeners
 startBtn.addEventListener('click', (e) => {
-  if(e) {
+  if(e && currentTask.innerHTML.length > 0) {
     disableStartBtn(true)
     startTimer()
     isPaused = false
+  }else {
+    alert('Please select a task you want to work on')
   }
 })
 
@@ -191,7 +193,6 @@ resetBtn.addEventListener('click', ()=> {
   isReset = true
   disableStartBtn(false)
   if(isPaused) {
-    console.log(isPaused)
     resetTimer()
   }
 })
