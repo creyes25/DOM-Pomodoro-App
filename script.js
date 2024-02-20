@@ -1,9 +1,13 @@
 const timerDisplay = document.querySelector('.timerDisplay')
+const pomodoroStatus = document.querySelector('.inital-status')
+const shortBreakStatus = document.querySelector('.short-status')
+const longBreakStatus = document.querySelector('.long-status')
 const currentCycle = document.querySelector('.current-cycle')
 const cyclesTotal = document.querySelector('.total-cycles')
 const startBtn = document.querySelector('.start-btn')
 const pauseBtn = document.querySelector('.pause-btn')
 const resetBtn = document.querySelector('.reset-btn')
+
 
 
 // POMODORO
@@ -25,6 +29,7 @@ let minutes, seconds
 let isPaused, isReset = false
 let timer = currentTimer()
 
+// displays default settings timer
 function defaultTimerDisplay() {
   totalCycles = defaultTimerSettings.totalCycles
   countdownDisplay(timer)
@@ -34,6 +39,7 @@ function defaultTimerDisplay() {
 
 defaultTimerDisplay()
 
+// finds the current time base on status 
 function currentTimer() {
   if (currentStatus === 'pomodoro') {
     return timerInSeconds
@@ -44,7 +50,12 @@ function currentTimer() {
   }
 }
 
+// Timer starts the countdown
 function startTimer() {
+  currentCycle.innerHTML = initialCycle
+  cyclesTotal.innerHTML = totalCycles
+  statusDisplay(currentStatus)
+
   if (initialCycle > totalCycles) {
     //! NOTE: check to see if this can be added to a function
     let userHasCompletedTask = prompt('Did you finish your task?')
@@ -60,10 +71,10 @@ function startTimer() {
     }
 
   } else {
-    currentCycle.innerHTML = initialCycle
-    cyclesTotal.innerHTML = totalCycles
-    
+
     const interval = setInterval(() => {
+      
+
       if(isPaused) {
         clearInterval(interval)
       }
@@ -83,18 +94,15 @@ function startTimer() {
 
         if(currentStatus === 'pomodoro') {
           currentStatus = 'short'
-          timer = currentTimer()
-          startTimer()
         } else if (currentStatus === 'short') {
           currentStatus = 'pomodoro'
-          timer = currentTimer()
           initialCycle++
-          startTimer()
         } else if (currentStatus === 'long') {
           currentStatus = 'pomodoro'
-          timer = currentTimer()
-          startTimer()
         }
+
+        timer = currentTimer()
+        startTimer()
       }
     }, 50)
 
@@ -102,13 +110,14 @@ function startTimer() {
 }
 
 
-
+// resets the current status timer
 function resetTimer() {
   timer = currentTimer()
   countdownDisplay(timer)
   isPaused, isReset = false
 }
 
+// displays timer in min and seconds
 function countdownDisplay(timer) {
   minutes = Math.floor(timer / 60)
   seconds = timer % 60
@@ -119,6 +128,7 @@ function countdownDisplay(timer) {
   return timerDisplay.innerHTML = `${minutes}:${seconds}`
 }
 
+// disables start btn when timer is running
 function disableStartBtn(hasStarted) {
   if (hasStarted) {
     startBtn.disabled = true
@@ -127,7 +137,38 @@ function disableStartBtn(hasStarted) {
   }
 }
 
+// displays the current status
+function statusDisplay(currentStatus) {
+  switch (currentStatus) {
+    case 'pomodoro':
+      statusStyling(pomodoroStatus)
+      removeStatusStyling(shortBreakStatus, longBreakStatus)
+      break;
+    case 'short': 
+      statusStyling(shortBreakStatus)
+      removeStatusStyling(pomodoroStatus, longBreakStatus)
+      break;
 
+    case 'long':
+      statusStyling(longBreakStatus)
+      removeStatusStyling(shortBreakStatus, pomodoroStatus)
+      break;
+    default:
+      break;
+  }
+}
+
+// styles the status element to be displayed
+function statusStyling(currentStatus) {
+  currentStatus.style.textDecoration = 'underline'
+}
+
+// removes styling on status that is not current
+function removeStatusStyling(...statuses) {
+  statuses.forEach(status => {
+    status.style.removeProperty('text-decoration')
+  })
+}
 
 
 // POMODORO Event Listeners
