@@ -1,13 +1,24 @@
 // Tasks
 const inputTask = document.querySelector('.input-task')
 const addBtn = document.querySelector('.add-btn')
+const activeTasks = document.querySelector('.active-list')
+const completedTasks = document.querySelector('.completed-list')
 
 const taskList = []
 
+function $(el, className) {
+  const newElement = document.createElement(el)
 
+  newElement.classList.add(className)
+
+  return newElement
+}
+
+// create a new task
 function createNewTask(value) {
   const task = {
-    value: value,
+    id:null,
+    name: value,
     isCompleted: false
   }
 
@@ -15,7 +26,40 @@ function createNewTask(value) {
 }
 
 function displayAllTasks() {
-  
+  activeTasks.innerHTML = ''
+  completedTasks.innerHTML = ''
+
+  taskList.forEach((task, id) => {
+    task.id = id
+
+    const li = $('li', id)
+    const checkbox = $('div', 'checkbox')
+    const taskName = $('span', task.name)
+    const btnsContainer = $('div', 'btns-cont')
+    const startTask = $('div', 'run-btn')
+    const deleteBtn = $('div', 'delete-btn')
+    
+    
+    taskName.innerHTML = task.name
+    startTask.innerHTML = 'Run'
+    deleteBtn.innerHTML = '🗑️'
+
+    btnsContainer.appendChild(startTask)
+    btnsContainer.appendChild(deleteBtn)
+    li.appendChild(checkbox)
+    li.appendChild(taskName)
+    li.appendChild(btnsContainer)
+
+    // checks to see if task is completed
+    if(task.isCompleted) {
+      btnsContainer.removeChild(startTask)
+      completedTasks.appendChild(li)
+    }else {
+      
+      activeTasks.appendChild(li)
+    }
+    
+  })
 }
 
 // add a new task into a list
