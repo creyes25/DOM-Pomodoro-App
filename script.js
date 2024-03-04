@@ -77,7 +77,23 @@ addBtn.addEventListener('click', () => {
 })
 
 
+window.addEventListener('click', e => {
+  const className = e.target.className
 
+  if (className === 'checkbox') {
+    const taskCont = parseInt(e.target.parentNode.className)
+    
+    taskList.forEach(task=> {
+      if (task.id === taskCont) {
+        (task.isCompleted) ? task.isCompleted = false : task.isCompleted = true
+      }
+
+    })
+  }
+
+  displayAllTasks()
+
+})
 
 
 
