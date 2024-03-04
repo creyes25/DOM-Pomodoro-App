@@ -4,7 +4,7 @@ const addBtn = document.querySelector('.add-btn')
 const activeTasks = document.querySelector('.active-list')
 const completedTasks = document.querySelector('.completed-list')
 
-const taskList = []
+let taskList = []
 
 function $(el, className) {
   const newElement = document.createElement(el)
@@ -76,19 +76,34 @@ addBtn.addEventListener('click', () => {
   displayAllTasks()
 })
 
-
+// handles the selected task on the list
 window.addEventListener('click', e => {
   const className = e.target.className
+  
 
+  // handles checkboxes of task
   if (className === 'checkbox') {
     const taskCont = parseInt(e.target.parentNode.className)
-    
     taskList.forEach(task=> {
       if (task.id === taskCont) {
         (task.isCompleted) ? task.isCompleted = false : task.isCompleted = true
       }
-
     })
+  }
+
+  // handles delete btn of task
+  if (className === 'delete-btn') {
+    const taskCont = parseInt(e.target.parentNode.parentNode.className)
+    const updatedTaskList = []
+
+    taskList.forEach(task => {
+      if(task.id !== taskCont) {
+        updatedTaskList.push(task)
+      }
+    })
+
+    taskList.length = 0
+    taskList = [...updatedTaskList]
   }
 
   displayAllTasks()
