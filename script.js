@@ -1,3 +1,61 @@
+// Tasks
+const inputTask = document.querySelector('.input-task')
+const addBtn = document.querySelector('.add-btn')
+
+const taskList = []
+
+
+function createNewTask(value) {
+  const task = {
+    value: value,
+    isCompleted: false
+  }
+
+  taskList.push(task)
+}
+
+function displayAllTasks() {
+  
+}
+
+// add a new task into a list
+addBtn.addEventListener('click', () => {
+  const inputValue = inputTask.value
+
+  if(inputValue === '') return
+
+  createNewTask(inputValue)
+
+  inputTask.value = ''
+
+  // call function to display the new task
+  displayAllTasks()
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const timerDisplay = document.querySelector('.timerDisplay')
 const pomodoroStatus = document.querySelector('.inital-status')
 const shortBreakStatus = document.querySelector('.short-status')
