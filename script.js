@@ -6,6 +6,7 @@ const completedTasks = document.querySelector('.completed-list')
 const currentTask = document.querySelector('.current-task')
 
 
+
 let taskList = []
 
 function $(el, className) {
@@ -175,6 +176,7 @@ let initialCycle = 1
 let minutes, seconds
 let isPaused, isReset = false
 let timer = currentTimer()
+let interval
 
 // displays default settings timer
 function defaultTimerDisplay() {
@@ -208,7 +210,7 @@ function startTimer() {
 
   } else {
 
-    const interval = setInterval(() => {
+    interval = setInterval(() => {
     
       if(isPaused) {
         clearInterval(interval)
@@ -261,6 +263,13 @@ function finishOrContinueWorking() {
 
 // resets the current status timer
 function resetTimer() {
+  totalCycles = defaultTimerSettings.totalCycles
+  currentStatus = defaultTimerSettings.currentStatus
+  totalCycles = defaultTimerSettings.totalCycles
+  initialCycle = 1
+  currentCycle.innerHTML = initialCycle
+  cyclesTotal.innerHTML = totalCycles
+  statusDisplay(currentStatus)
   timer = currentTimer()
   countdownDisplay(timer)
   isPaused, isReset = false
@@ -344,5 +353,7 @@ resetBtn.addEventListener('click', ()=> {
     resetTimer()
   }
 })
+
+
 
 
