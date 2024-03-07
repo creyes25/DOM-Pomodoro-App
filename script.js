@@ -3,6 +3,8 @@ const inputTask = document.querySelector('.input-task')
 const addBtn = document.querySelector('.add-btn')
 const activeTasks = document.querySelector('.active-list')
 const completedTasks = document.querySelector('.completed-list')
+const currentTask = document.querySelector('.current-task')
+
 
 let taskList = []
 
@@ -79,6 +81,7 @@ addBtn.addEventListener('click', () => {
 // handles the selected task on the list
 window.addEventListener('click', e => {
   const className = e.target.className
+  const updatedTaskList = []
   
 
   // handles checkboxes of task
@@ -91,10 +94,21 @@ window.addEventListener('click', e => {
     })
   }
 
+  // handles run btn 
+  if (className === 'run-btn') {
+    const taskCont = parseInt(e.target.parentNode.parentNode.className)
+    
+    taskList.forEach(task => {
+      if (task.id === taskCont) {
+        currentTask.innerHTML = task.name
+      }
+    })
+  }
+
   // handles delete btn of task
   if (className === 'delete-btn') {
     const taskCont = parseInt(e.target.parentNode.parentNode.className)
-    const updatedTaskList = []
+    
 
     taskList.forEach(task => {
       if(task.id !== taskCont) {
@@ -140,7 +154,7 @@ const cyclesTotal = document.querySelector('.total-cycles')
 const startBtn = document.querySelector('.start-btn')
 const pauseBtn = document.querySelector('.pause-btn')
 const resetBtn = document.querySelector('.reset-btn')
-const currentTask = document.querySelector('.current-task')
+
 
 
 // POMODORO
