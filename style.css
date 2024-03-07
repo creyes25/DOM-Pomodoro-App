@@ -115,6 +115,10 @@ li {
   
 }
 
+.exit-settings-btn {
+  cursor: pointer;
+}
+
 .timers {
   display: flex;
   flex-wrap: wrap;

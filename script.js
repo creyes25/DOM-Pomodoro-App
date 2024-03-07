@@ -155,6 +155,10 @@ const cyclesTotal = document.querySelector('.total-cycles')
 const startBtn = document.querySelector('.start-btn')
 const pauseBtn = document.querySelector('.pause-btn')
 const resetBtn = document.querySelector('.reset-btn')
+const settingsBtn = document.querySelector('.settings')
+const settingsDisplay = document.querySelector('.settings-display')
+const exitSettingsBtn = document.querySelector('.exit-settings-btn')
+const saveBtn = document.querySelector('.save')
 
 
 
@@ -354,6 +358,15 @@ resetBtn.addEventListener('click', ()=> {
   }
 })
 
+settingsBtn.addEventListener('click', () => {
+  settingsDisplay.style.display = 'block'
+})
 
 
+exitSettingsBtn.addEventListener('click', () => {
+  settingsDisplay.style.display = 'none'
+})
 
+saveBtn.addEventListener('click', () => {
+  settingsDisplay.style.display = 'none'
+})
