@@ -264,6 +264,7 @@ function resetTimer() {
   timer = currentTimer()
   countdownDisplay(timer)
   isPaused, isReset = false
+  currentTask.innerHTML = ''
 }
 
 // displays timer in min and seconds
