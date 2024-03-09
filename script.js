@@ -37,7 +37,7 @@ function displayAllTasks() {
 
     const li = $('li', id)
     const checkbox = $('div', 'checkbox')
-    const taskName = $('span', task.name)
+    const taskName = $('span', task.id)
     const btnsContainer = $('div', 'btns-cont')
     const startTask = $('div', 'run-btn')
     const deleteBtn = $('div', 'delete-btn')
@@ -101,6 +101,7 @@ window.addEventListener('click', e => {
     
     taskList.forEach(task => {
       if (task.id === taskCont) {
+        currentTask.setAttribute('id', `${task.id}`)
         currentTask.innerHTML = task.name
       }
     })
@@ -156,6 +157,8 @@ const startBtn = document.querySelector('.start-btn')
 const pauseBtn = document.querySelector('.pause-btn')
 const resetBtn = document.querySelector('.reset-btn')
 const resetAllBtn = document.querySelector('.reset-all')
+
+// settings display
 const settingsBtn = document.querySelector('.settings')
 const settingsDisplay = document.querySelector('.settings-display')
 const exitSettingsBtn = document.querySelector('.exit-settings-btn')
@@ -164,6 +167,11 @@ const pomodoroInput = document.querySelector('.pomodoro-input')
 const shortInput = document.querySelector('.short-input')
 const longInput = document.querySelector('.long-input')
 const cyclesInput = document.querySelector('.cycles-input')
+
+// end of cycles display
+const completedCyclesDisplay = document.querySelector('.completed-task-display')
+const yesBtn = document.querySelector('.yes-btn')
+const noBtn = document.querySelector('.no-btn')
 
 
 
@@ -183,19 +191,12 @@ const defaultTimerSettings = {
   totalCycles: defaultTotalCycles,
   currentStatus : 'pomodoro'
 }
-
-// const timerInSeconds = defaultTimerSettings.timer * 60
-// const shortBreakInSec = defaultTimerSettings.shortBreak * 60
-// const longBreakInSec = defaultTimerSettings.longBreak * 60
-// let totalCycles = defaultTimerSettings.totalCycles
-// let currentStatus = defaultTimerSettings.currentStatus
 let timerInSeconds, shortBreakInSec, longBreakInSec, totalCycles, currentStatus
 let initialCycle
 let minutes, seconds
 let isPaused, isReset = false
-// let timer = currentTimer()
 let timer
-let interval
+
 
 // displays default settings timer
 function defaultTimerDisplay() {
@@ -207,6 +208,7 @@ function defaultTimerDisplay() {
   initialCycle = 1
   timer = currentTimer()
   countdownDisplay(timer)
+  currentTask.innerHTML =''
   currentCycle.innerHTML = initialCycle
   cyclesTotal.innerHTML = totalCycles
 }
@@ -235,7 +237,7 @@ function startTimer() {
 
   } else {
 
-    interval = setInterval(() => {
+    const interval = setInterval(() => {
     
       if(isPaused) {
         clearInterval(interval)
@@ -273,7 +275,8 @@ function startTimer() {
 
 // user decides whether to continue working on task or finish
 function finishOrContinueWorking() {
-  let userHasCompletedTask = prompt('Did you finish your task?')
+  // let userHasCompletedTask = prompt('Did you finish your task?')
+  completedCyclesDisplay.style.display = 'block'
     if(userHasCompletedTask === 'no') {
       let increaseTotalCyclesBy = prompt('How many more cycle would you like to add?')
       currentStatus = 'long'
@@ -291,7 +294,6 @@ function resetTimer() {
   defaultTimerDisplay()
   statusDisplay(currentStatus)
   isPaused, isReset = false
-  currentTask.innerHTML = ''
 }
 
 // displays timer in min and seconds
@@ -416,6 +418,17 @@ saveBtn.addEventListener('click', () => {
   defaultTimerSettings.totalCycles = cyclesSettings
 
   defaultTimerDisplay()
+})
 
+// handles completion of a task
+yesBtn.addEventListener('click', () => {
+  taskList.forEach(task => {
+    if(task.id === parseInt(currentTask.id)) {
+      task.isCompleted = true
+      displayAllTasks()
+      defaultTimerDisplay()
+      completedCyclesDisplay.style.display = 'none'
+    }
+  })
   
 })

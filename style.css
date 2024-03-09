@@ -137,7 +137,7 @@ li {
   margin: 30px 0 10px 80% ;
 }
 
-.continue-end-task-display {
+.completed-task-display{
   display: flex;
   flex-direction: column;
   justify-content: center;
