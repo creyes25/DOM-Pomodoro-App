@@ -159,32 +159,52 @@ const settingsBtn = document.querySelector('.settings')
 const settingsDisplay = document.querySelector('.settings-display')
 const exitSettingsBtn = document.querySelector('.exit-settings-btn')
 const saveBtn = document.querySelector('.save')
+const pomodoroInput = document.querySelector('.pomodoro-input')
+const shortInput = document.querySelector('.short-input')
+const longInput = document.querySelector('.long-input')
+const cyclesInput = document.querySelector('.cycles-input')
 
 
 
 // POMODORO
+
+// default values
+const defaultPomodoroTimer = pomodoroInput.value
+const defaultShortTimer = shortInput.value
+const defaultLongTmer = longInput.value
+const defaultTotalCycles = longInput.value
+
+
 const defaultTimerSettings = {
-  timer : 1,
-  shortBreak : 2,
-  longBreak : 3,
-  totalCycles: 1,
+  timer : defaultPomodoroTimer,
+  shortBreak : defaultShortTimer,
+  longBreak : defaultLongTmer,
+  totalCycles: defaultTotalCycles,
   currentStatus : 'pomodoro'
 }
 
-const timerInSeconds = defaultTimerSettings.timer * 60
-const shortBreakInSec = defaultTimerSettings.shortBreak * 60
-const longBreakInSec = defaultTimerSettings.longBreak * 60
-let totalCycles = defaultTimerSettings.totalCycles
-let currentStatus = defaultTimerSettings.currentStatus
-let initialCycle = 1
+// const timerInSeconds = defaultTimerSettings.timer * 60
+// const shortBreakInSec = defaultTimerSettings.shortBreak * 60
+// const longBreakInSec = defaultTimerSettings.longBreak * 60
+// let totalCycles = defaultTimerSettings.totalCycles
+// let currentStatus = defaultTimerSettings.currentStatus
+let timerInSeconds, shortBreakInSec, longBreakInSec, totalCycles, currentStatus
+let initialCycle
 let minutes, seconds
 let isPaused, isReset = false
-let timer = currentTimer()
+// let timer = currentTimer()
+let timer
 let interval
 
 // displays default settings timer
 function defaultTimerDisplay() {
-  totalCycles = defaultTimerSettings.totalCycles
+  timerInSeconds = defaultTimerSettings.timer * 60
+  shortBreakInSec = defaultTimerSettings.shortBreak * 60
+  longBreakInSec = defaultTimerSettings.longBreak * 60
+  totalCycles = parseInt(defaultTimerSettings.totalCycles) 
+  currentStatus = defaultTimerSettings.currentStatus
+  initialCycle = 1
+  timer = currentTimer()
   countdownDisplay(timer)
   currentCycle.innerHTML = initialCycle
   cyclesTotal.innerHTML = totalCycles
@@ -231,7 +251,7 @@ function startTimer() {
       if (timer < 0) {
         isPaused = true
         clearInterval(interval)
-        disableStartBtn(false)
+        disableBtns(false)
 
         if(currentStatus === 'pomodoro') {
           currentStatus = 'short'
@@ -267,15 +287,8 @@ function finishOrContinueWorking() {
 
 // resets the current status timer
 function resetTimer() {
-  totalCycles = defaultTimerSettings.totalCycles
-  currentStatus = defaultTimerSettings.currentStatus
-  totalCycles = defaultTimerSettings.totalCycles
-  initialCycle = 1
-  currentCycle.innerHTML = initialCycle
-  cyclesTotal.innerHTML = totalCycles
+  defaultTimerDisplay()
   statusDisplay(currentStatus)
-  timer = currentTimer()
-  countdownDisplay(timer)
   isPaused, isReset = false
   currentTask.innerHTML = ''
 }
@@ -292,11 +305,13 @@ function countdownDisplay(timer) {
 }
 
 // disables start btn when timer is running
-function disableStartBtn(hasStarted) {
+function disableBtns(hasStarted) {
   if (hasStarted) {
     startBtn.disabled = true
+    settingsBtn.style.pointerEvents = 'none'
   }else {
     startBtn.disabled = false
+    settingsBtn.style.pointerEvents = 'auto'
   }
 }
 
@@ -337,7 +352,7 @@ function removeStatusStyling(...statuses) {
 // POMODORO Event Listeners
 startBtn.addEventListener('click', (e) => {
   if(e && currentTask.innerHTML.length > 0) {
-    disableStartBtn(true)
+    disableBtns(true)
     startTimer()
     isPaused = false
   }else {
@@ -346,13 +361,13 @@ startBtn.addEventListener('click', (e) => {
 })
 
 pauseBtn.addEventListener('click', () => {
-  disableStartBtn(false)
+  disableBtns(false)
   isPaused = true
 })
 
 resetBtn.addEventListener('click', ()=> {
   isReset = true
-  disableStartBtn(false)
+  disableBtns(false)
   if(isPaused) {
     resetTimer()
   }
@@ -363,10 +378,26 @@ settingsBtn.addEventListener('click', () => {
 })
 
 
+
 exitSettingsBtn.addEventListener('click', () => {
   settingsDisplay.style.display = 'none'
 })
 
+// save button in the settings 
 saveBtn.addEventListener('click', () => {
   settingsDisplay.style.display = 'none'
+  
+  const pomodoroSettings = pomodoroInput.value
+  const shortSettings = shortInput.value
+  const longSettings = longInput.value
+  const cyclesSettings = cyclesInput.value
+  
+  defaultTimerSettings.timer = pomodoroSettings
+  defaultTimerSettings.shortBreak = shortSettings
+  defaultTimerSettings.longBreak = longSettings
+  defaultTimerSettings.totalCycles = cyclesSettings
+
+  defaultTimerDisplay()
+
+  
 })
