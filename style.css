@@ -136,3 +136,21 @@ li {
 .save {
   margin: 30px 0 10px 80% ;
 }
+
+.continue-end-task-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 20px;
+  width: 30%;
+  height: 25%;
+  padding: 10px;
+  margin: 10px auto ;
+  background-color: white;
+  position: absolute;
+  bottom: 25%;
+  left: 35%;
+  display: none;
+}
