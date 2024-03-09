@@ -172,6 +172,9 @@ const cyclesInput = document.querySelector('.cycles-input')
 const completedCyclesDisplay = document.querySelector('.completed-task-display')
 const yesBtn = document.querySelector('.yes-btn')
 const noBtn = document.querySelector('.no-btn')
+const uncompletedTask = document.querySelector('.uncompleted-task')
+const addCycles = document.querySelector('.add-cycles')
+const continueWorkBtn = document.querySelector('.cont-work-btn')
 
 
 
@@ -228,17 +231,17 @@ function currentTimer() {
 
 // Timer starts the countdown
 function startTimer() {
-  currentCycle.innerHTML = initialCycle
+  
   cyclesTotal.innerHTML = totalCycles
   statusDisplay(currentStatus)
 
   if (initialCycle > totalCycles) {
-    finishOrContinueWorking()
+    completedCyclesDisplay.style.display = 'flex'
 
   } else {
 
     const interval = setInterval(() => {
-    
+      currentCycle.innerHTML = initialCycle
       if(isPaused) {
         clearInterval(interval)
       }
@@ -273,21 +276,6 @@ function startTimer() {
   }
 }
 
-// user decides whether to continue working on task or finish
-function finishOrContinueWorking() {
-  // let userHasCompletedTask = prompt('Did you finish your task?')
-  completedCyclesDisplay.style.display = 'block'
-    if(userHasCompletedTask === 'no') {
-      let increaseTotalCyclesBy = prompt('How many more cycle would you like to add?')
-      currentStatus = 'long'
-      totalCycles += parseInt(increaseTotalCyclesBy)
-      timer = currentTimer()
-      startTimer()
-    }else {
-      initialCycle = 1
-      defaultTimerDisplay()
-    }
-}
 
 // resets the current status timer
 function resetTimer() {
@@ -431,4 +419,20 @@ yesBtn.addEventListener('click', () => {
     }
   })
   
+})
+
+// handles no btn (when task is not completed after tasks)
+noBtn.addEventListener('click', () => {
+  uncompletedTask.style.display = 'block'
+})
+
+// handles the continuation of unfinished task
+continueWorkBtn.addEventListener('click', ()=> {
+  const cyclesToAdd = parseInt(addCycles.value)
+  currentStatus = 'long'
+  totalCycles += cyclesToAdd
+  timer = currentTimer()
+  startTimer()
+  completedCyclesDisplay.style.display = 'none'
+  uncompletedTask.style.display = 'none'
 })

@@ -145,12 +145,16 @@ li {
   border: 1px solid black;
   border-radius: 20px;
   width: 30%;
-  height: 25%;
+  height: 35%;
   padding: 10px;
   margin: 10px auto ;
   background-color: white;
   position: absolute;
   bottom: 25%;
   left: 35%;
+  display: none;
+}
+
+.uncompleted-task {
   display: none;
 }
