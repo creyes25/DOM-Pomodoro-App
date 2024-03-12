@@ -229,6 +229,9 @@ function currentTimer() {
   }
 }
 
+const finishAudio = new Audio('https://www.soundjay.com/misc/sounds/magic-chime-06.mp3')
+
+
 // Timer starts the countdown
 function startTimer() {
   
@@ -268,6 +271,7 @@ function startTimer() {
           currentStatus = 'pomodoro'
         }
 
+        finishAudio.play()
         timer = currentTimer()
         startTimer()
       }
@@ -316,11 +320,13 @@ function statusDisplay(currentStatus) {
     case 'short': 
       statusStyling(shortBreakStatus)
       removeStatusStyling(pomodoroStatus, longBreakStatus)
+      finishAudio.play()
       break;
 
     case 'long':
       statusStyling(longBreakStatus)
       removeStatusStyling(shortBreakStatus, pomodoroStatus)
+      
       break;
     default:
       break;
@@ -330,6 +336,7 @@ function statusDisplay(currentStatus) {
 // styles the status element to be displayed
 function statusStyling(currentStatus) {
   currentStatus.style.textDecoration = 'underline'
+  
 }
 
 // removes styling on status that is not current
@@ -346,6 +353,7 @@ startBtn.addEventListener('click', (e) => {
     disableBtns(true)
     startTimer()
     isPaused = false
+    
   }else {
     alert('Please select a task you want to work on')
   }
