@@ -5,7 +5,9 @@ const activeTasks = document.querySelector('.active-list')
 const completedTasks = document.querySelector('.completed-list')
 const currentTask = document.querySelector('.current-task')
 
+const finishAudio = new Audio('https://www.soundjay.com/misc/sounds/magic-chime-06.mp3')
 
+const completedTaskAudio = new Audio ('https://www.soundjay.com/misc/sounds/dream-harp-02.mp3')
 
 let taskList = []
 
@@ -98,11 +100,13 @@ window.addEventListener('click', e => {
   // handles run btn 
   if (className === 'run-btn') {
     const taskCont = parseInt(e.target.parentNode.parentNode.className)
-    
+    completedTaskAudio.pause();
+    completedTaskAudio.currentTime = 0;
     taskList.forEach(task => {
       if (task.id === taskCont) {
         currentTask.setAttribute('id', `${task.id}`)
         currentTask.innerHTML = task.name
+        
       }
     })
   }
@@ -178,6 +182,9 @@ const continueWorkBtn = document.querySelector('.cont-work-btn')
 
 
 
+
+
+
 // POMODORO
 
 // default values
@@ -229,7 +236,7 @@ function currentTimer() {
   }
 }
 
-const finishAudio = new Audio('https://www.soundjay.com/misc/sounds/magic-chime-06.mp3')
+
 
 
 // Timer starts the countdown
@@ -271,6 +278,7 @@ function startTimer() {
           currentStatus = 'pomodoro'
         }
 
+        finishAudio.currentTime = 0
         finishAudio.play()
         timer = currentTimer()
         startTimer()
@@ -420,6 +428,7 @@ saveBtn.addEventListener('click', () => {
 yesBtn.addEventListener('click', () => {
   taskList.forEach(task => {
     if(task.id === parseInt(currentTask.id)) {
+      completedTaskAudio.play()
       task.isCompleted = true
       displayAllTasks()
       defaultTimerDisplay()
