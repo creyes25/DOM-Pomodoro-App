@@ -161,6 +161,7 @@ const startBtn = document.querySelector('.start-btn')
 const pauseBtn = document.querySelector('.pause-btn')
 const resetBtn = document.querySelector('.reset-btn')
 const resetAllBtn = document.querySelector('.reset-all')
+const progressBarChange = document.querySelector('.progess-bar')
 
 // settings display
 const settingsBtn = document.querySelector('.settings')
@@ -202,7 +203,7 @@ const defaultTimerSettings = {
   currentStatus : 'pomodoro'
 }
 let timerInSeconds, shortBreakInSec, longBreakInSec, totalCycles, currentStatus
-let initialCycle
+let initialCycle, initialTime
 let minutes, seconds
 let isPaused, isReset = false
 let timer
@@ -215,7 +216,7 @@ function defaultTimerDisplay() {
   longBreakInSec = defaultTimerSettings.longBreak * 60
   totalCycles = parseInt(defaultTimerSettings.totalCycles) 
   currentStatus = defaultTimerSettings.currentStatus
-  initialCycle = 1
+  initialCycle = 1,
   timer = currentTimer()
   countdownDisplay(timer)
   currentTask.innerHTML =''
@@ -228,10 +229,13 @@ defaultTimerDisplay()
 // finds the current time base on status 
 function currentTimer() {
   if (currentStatus === 'pomodoro') {
+    initialTime = timerInSeconds
     return timerInSeconds
   }else if (currentStatus === 'short') {
+    initialTime = shortBreakInSec
     return shortBreakInSec
   }else if (currentStatus === 'long') {
+    initialTime = longBreakInSec
     return longBreakInSec
   }
 }
@@ -263,6 +267,8 @@ function startTimer() {
   
       countdownDisplay(timer)
       timer--
+      
+      progressBar(initialTime, timer)
 
       if (timer < 0) {
         isPaused = true
@@ -352,6 +358,14 @@ function removeStatusStyling(...statuses) {
   statuses.forEach(status => {
     status.style.removeProperty('text-decoration')
   })
+}
+
+// progress bar
+
+function progressBar(initialTime, currentTime) {
+  const percentage = ((initialTime - currentTime)/ initialTime) * 100
+
+  progressBarChange.style.width = `${percentage}%`
 }
 
 

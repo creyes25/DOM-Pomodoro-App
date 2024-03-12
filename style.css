@@ -158,3 +158,19 @@ li {
 .uncompleted-task {
   display: none;
 }
+
+
+.progess-bar-cont{
+  width: 80%;
+  height: 20px;
+  margin: 20px auto;
+  background-color: black;
+  border-radius: 10px;
+}
+
+.progess-bar {
+  width: 0;
+  height: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
