@@ -1,22 +1,70 @@
 body {
-  margin: 0;
+  margin: 0 auto;
   text-align: center;
+  max-width: 1300px;
+  background: linear-gradient(125deg, #978CC6ff, #7670AEff, #555497ff, #33377Fff, #121B67ff);
 }
 
 button {
   cursor: pointer;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.209);
+  width: 20%;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 1.2em;
 }
 
-.task-creation {
-  border: 1px solid black;
+button:active {
+  box-shadow: 0 0 0 0;
+  border: 2px solid #121B67ff;
+}
+
+header h1 {
+  color: rgb(253, 251, 251);
+  font-size: 2.5em;
+  margin: 35px auto 0px;
+  text-shadow: 2px 2px 2px black;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  /* border: 1px solid black; */
   border-radius: 12px;
-  width: 30%;
+  list-style: none;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  background-color: #978CC6ff;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.593);
+}
+
+li span {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 15px;
+  color: rgb(9, 15, 68);
+}
+
+
+.task-creation {
+  border-radius: 12px;
+  width: 40%;
   margin: 50px auto 15px;
   padding: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1em;
+  background-color: #33377Fff;
+  box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.433);
 }
 
 
@@ -26,69 +74,167 @@ button {
   border: none;
   outline: none;
   font-size: 1.2em;
+  background-color: #33377Fff;
+  color: rgba(255, 255, 255, 0.886);
 }
 
 .add-btn {
-  width: 20%;
-  border: none;
-  border-radius: 10px;
-  padding: 5px;
-  font-size: 1em;
+  background-color: rgb(151, 140, 198);
+  box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.209);
+  color: white;
 }
 
-li {
-  /* border: 1px solid black; */
-  list-style: none;
-  padding: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1em;
+.active-tasks h2, .completed-tasks h2 {
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  font-size: 1.6em;
+  text-decoration: underline;
+  text-decoration-color: #121B67ff;
+  text-underline-offset: 3px;
 }
+
 
 .checkbox {
-  width: 15px;
-  height: 15px;
-  border: 1px solid black;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
+  cursor: pointer;
+  padding: 2px;
+  box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.33);
+}
+
+.checkbox:active {
+  box-shadow: 0 0 0;
+}
+
+.active-list li .checkbox {
+  border: dotted white;
+}
+
+.active-list li .checkbox:hover {
+  border: solid white;
+}
+
+.completed-list li .checkbox {
+  background-color: #121B67ff;
+  border: none;
+}
+
+.completed-list li .checkbox::after {
+  content: '✓';
+  color: white;
+}
+
+.completed-list li .checkbox:hover {
+  border: solid #121B67ff;
+  background-color: #978CC6ff;
+}
+
+.completed-list li .checkbox:hover::after {
+  content: none;
 }
 
 .btns-cont {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  gap: 1em;
+  margin-left: 40px;
 }
 
+.run-btn {
+  border: 1px solid #7670AEff;
+  border-radius: 10px;
+  padding: 2px 4px;
+  width: 50px;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.386);
+  color: #121B67ff;
+}
+
+.run-btn:hover {
+  border: 2px solid #7670AEff;
+}
+
+.run-btn:active {
+  border: 2px solid #7670AEff;
+  box-shadow: 0 0 0;
+  font-weight: bold;
+}
+
+.delete-btn {
+  cursor: pointer;
+  color: transparent;
+  text-shadow: 0 0 0 #970000;
+  font-size: 20px;
+  filter: drop-shadow(2px 2px 1px #00000094);
+
+}
+
+.delete-btn:hover {
+  filter: drop-shadow(2px 2px 1px #97000094);
+}
+
+.delete-btn:active {
+  filter: drop-shadow(0px 0px 0px #97000094);
+}
+
+
+.pomodoro-cont h2 {
+  font-size: 1.6em;
+  line-height: 1.8em;
+}
+
+.current-task {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
 .pomodoro-tasks {
   display: flex;
   justify-content: space-between;
-  padding: 10px 2.5rem;
+  padding: 10px 2.2rem;
   margin-top: 30px;
 }
 
 .pomodoro-status {
   display: flex;
-  gap: 2em;
+  gap: 1.2em;
   justify-content: space-around;
   align-items: center;
-  padding: 5px 15px;
+  padding: 15px 20px;
   border: 1px solid black;
   border-radius: 30px;
-  margin: 40px 0px;
+  margin: 40px 10px 25px;
+  background-color: rgba(18, 27, 103, 0.825);
+  color: white;
+}
+
+.pomodoro-status h3 {
+  margin: 0 auto;
+  font-size: 1.2em;
+}
+
+.current-status {
+  border: 1px solid blue;
+  border-radius: 15px;
+  padding: 8px 15px;
+
 }
 
 .settings {
   border: 1px solid;
-  width: 80px;
+  width: 90px;
   padding: 5px;
   border-radius: 20px;
-  margin: auto;
+  margin: 10px auto 20px;
   cursor: pointer;
 }
 
 .settings h3 {
   margin: 0;
+  font-size: 1.3em;
 }
 
 .settings-display {
@@ -102,7 +248,15 @@ li {
   left: 30%;
   display: none;
 
+}
 
+.cycles {
+  font-size: 1.3em;
+}
+
+.timerDisplay {
+  font-size: 4.5em;
+  margin: 30px auto 40px;
 }
 
 .settings-display .title-exit {
@@ -173,4 +327,10 @@ li {
   height: 20px;
   background-color: white;
   border-radius: 10px;
+}
+
+.reset-all-cont {
+  text-align: center;
+  width: 50%;
+  margin: auto;
 }

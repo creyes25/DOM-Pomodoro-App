@@ -152,9 +152,9 @@ window.addEventListener('click', e => {
 
 
 const timerDisplay = document.querySelector('.timerDisplay')
-const pomodoroStatus = document.querySelector('.inital-status')
-const shortBreakStatus = document.querySelector('.short-status')
-const longBreakStatus = document.querySelector('.long-status')
+const pomodoroStatus = document.querySelector('.pomodoro')
+const shortBreakStatus = document.querySelector('.short-break')
+const longBreakStatus = document.querySelector('.long-break')
 const currentCycle = document.querySelector('.current-cycle')
 const cyclesTotal = document.querySelector('.total-cycles')
 const startBtn = document.querySelector('.start-btn')
@@ -222,6 +222,7 @@ function defaultTimerDisplay() {
   currentTask.innerHTML =''
   currentCycle.innerHTML = initialCycle
   cyclesTotal.innerHTML = totalCycles
+  
 }
 
 defaultTimerDisplay()
@@ -299,6 +300,8 @@ function startTimer() {
 function resetTimer() {
   defaultTimerDisplay()
   statusDisplay(currentStatus)
+  removeStatusStyling(pomodoroStatus,shortBreakStatus, longBreakStatus)
+  progressBarChange.style.width = `0%`
   isPaused, isReset = false
 }
 
@@ -350,13 +353,19 @@ function statusDisplay(currentStatus) {
 // styles the status element to be displayed
 function statusStyling(currentStatus) {
   currentStatus.style.textDecoration = 'underline'
-  
+  currentStatus.style.border = '1px solid blue'
+  currentStatus.style.borderRadius = '15px'
+  currentStatus.style.padding = '15px'
+
 }
 
 // removes styling on status that is not current
 function removeStatusStyling(...statuses) {
   statuses.forEach(status => {
     status.style.removeProperty('text-decoration')
+    status.style.removeProperty('border')
+    status.style.removeProperty('border-radius')
+    status.style.removeProperty('padding')
   })
 }
 
@@ -398,11 +407,12 @@ resetBtn.addEventListener('click', ()=> {
 resetAllBtn.addEventListener('click', () => {
   taskList.length = 0
   displayAllTasks()
-
   defaultTimerSettings.timer = defaultPomodoroTimer
   defaultTimerSettings.longBreak = defaultLongTmer
   defaultTimerSettings.shortBreak = defaultShortTimer
   defaultTimerSettings.totalCycles = defaultTotalCycles
+
+  progressBarChange.style.width = `0%`
 
   isReset = true
   disableBtns(false)
