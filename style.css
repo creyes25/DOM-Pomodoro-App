@@ -1,5 +1,3 @@
-/* *{margin: 0; padding: 0; box-sizing: border-box} */
-
 html {
   height: 100%;
   background: linear-gradient(125deg, #978CC6ff, #7670AEff, #555497ff, #33377Fff, #121B67ff);
@@ -58,7 +56,6 @@ li span {
   color: rgb(9, 15, 68);
 }
 
-
 .task-creation {
   border-radius: 12px;
   width: 40%;
@@ -71,7 +68,6 @@ li span {
   background-color: #33377Fff;
   box-shadow: 8px 8px 5px rgba(0, 0, 0, 0.433);
 }
-
 
 .input-task,
 .input-task:focus {
@@ -89,7 +85,6 @@ li span {
   color: #121B67ff;
 }
 
-
 .pomodoro-tasks {
   display: flex;
   justify-content: space-between;
@@ -102,7 +97,6 @@ li span {
   text-shadow: 2px 2px 2px black;
   font-size: 1.6em;
 }
-
 
 .checkbox {
   width: 18px;
@@ -212,7 +206,6 @@ li span {
 }
 
 
-
 .pomodoro-status {
   display: flex;
   gap: 1.2em;
@@ -231,7 +224,6 @@ li span {
   margin: 0 auto;
   font-size: 1.2em;
 }
-
 
 
 .settings {
@@ -282,7 +274,6 @@ li span {
   border: 2px solid #7670AEff;
   text-shadow: none;
 }
-
 
 .settings-display {
   border-radius: 20px;
@@ -430,7 +421,6 @@ input[type="number"] {
   width: 100px;
 }
 
-
 .progess-bar-cont{
   width: 80%;
   height: 20px;
@@ -474,7 +464,6 @@ input[type="number"] {
     height: 410px;
     margin: 0 auto ;
     left: 25%;
-  
   }
 
   .completed-task-display{
