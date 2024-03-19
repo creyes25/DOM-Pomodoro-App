@@ -205,7 +205,7 @@ const continueWorkBtn = document.querySelector('.cont-work-btn')
 const defaultPomodoroTimer = pomodoroInput.value
 const defaultShortTimer = shortInput.value
 const defaultLongTmer = longInput.value
-const defaultTotalCycles = longInput.value
+const defaultTotalCycles = cyclesInput.value
 
 
 const defaultTimerSettings = {
