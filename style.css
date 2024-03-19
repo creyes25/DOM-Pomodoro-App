@@ -1,8 +1,14 @@
+/* *{margin: 0; padding: 0; box-sizing: border-box} */
+
+html {
+  height: 100%;
+  background: linear-gradient(125deg, #978CC6ff, #7670AEff, #555497ff, #33377Fff, #121B67ff);
+}
+
 body {
   margin: 0 auto;
   text-align: center;
   max-width: 1300px;
-  background: linear-gradient(125deg, #978CC6ff, #7670AEff, #555497ff, #33377Fff, #121B67ff);
 }
 
 button {
@@ -33,7 +39,6 @@ ul {
 }
 
 li {
-  /* border: 1px solid black; */
   border-radius: 12px;
   list-style: none;
   padding: 10px;
@@ -81,16 +86,21 @@ li span {
 .add-btn {
   background-color: rgb(151, 140, 198);
   box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.209);
-  color: white;
+  color: #121B67ff;
+}
+
+
+.pomodoro-tasks {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 2.2rem;
+  margin-top: 30px;
 }
 
 .active-tasks h2, .completed-tasks h2 {
   color: white;
   text-shadow: 2px 2px 2px black;
   font-size: 1.6em;
-  text-decoration: underline;
-  text-decoration-color: #121B67ff;
-  text-underline-offset: 3px;
 }
 
 
@@ -132,6 +142,11 @@ li span {
 
 .completed-list li .checkbox:hover::after {
   content: none;
+}
+
+.completed-list li span {
+  text-decoration: line-through;
+  text-decoration-color: #33377Fff;
 }
 
 .btns-cont {
@@ -184,31 +199,32 @@ li span {
 .pomodoro-cont h2 {
   font-size: 1.6em;
   line-height: 1.8em;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  
 }
 
 .current-task {
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-underline-offset: 4px;
+  text-decoration-color: #121B67ff;
+  font-size: 1.7em;
 }
 
-.pomodoro-tasks {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 2.2rem;
-  margin-top: 30px;
-}
+
 
 .pomodoro-status {
   display: flex;
   gap: 1.2em;
   justify-content: space-around;
   align-items: center;
-  padding: 15px 20px;
-  border: 1px solid black;
+  padding: 15px 22px;
   border-radius: 30px;
   margin: 40px 10px 25px;
   background-color: rgba(18, 27, 103, 0.825);
   color: white;
+  text-shadow: 2px 2px 2px black;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.535);
 }
 
 .pomodoro-status h3 {
@@ -216,20 +232,23 @@ li span {
   font-size: 1.2em;
 }
 
-.current-status {
-  border: 1px solid blue;
-  border-radius: 15px;
-  padding: 8px 15px;
 
-}
 
 .settings {
-  border: 1px solid;
   width: 90px;
   padding: 5px;
   border-radius: 20px;
   margin: 10px auto 20px;
   cursor: pointer;
+  background-color: #33377Fff;
+  color: rgba(255, 255, 255, 0.841);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.596);
+  text-shadow: 2px 2px 2px black;
+}
+
+.settings:active {
+  box-shadow: none;
+  border: 2px solid #121B67ff;
 }
 
 .settings h3 {
@@ -237,58 +256,117 @@ li span {
   font-size: 1.3em;
 }
 
-.settings-display {
-  border: 1px solid black;
-  border-radius: 20px;
-  width: 45%;
-  margin: 10px auto ;
-  background-color: white;
-  position: absolute;
-  bottom: 30%;
-  left: 30%;
-  display: none;
-
-}
-
 .cycles {
   font-size: 1.3em;
+  color: rgba(255, 255, 255, 0.862);
+  margin-top: 40px;
 }
 
 .timerDisplay {
   font-size: 4.5em;
   margin: 30px auto 40px;
+  color: white;
+  text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.248);
 }
 
-.settings-display .title-exit {
+.start-pause-timer button, .reset-all {
+  font-size: 1.1em;
+  background-color: #978CC6ff;
+  color: #121B67ff;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.629);
+  border: none;
+  font-weight: bolder;
+}
+
+.start-pause-timer button:active, .reset-all:active {
+  border: 2px solid #7670AEff;
+  text-shadow: none;
+}
+
+
+.settings-display {
+  border-radius: 20px;
+  width: 560px;
+  height: 410px;
+  margin: 10px auto ;
+  background-color: white;
+  position: absolute;
+  top: 18vh;
+  left: 35%;
+  display: none;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.204);
+}
+
+.title-exit {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.328);
   width: 90%;
-  margin: auto;
-  
+  margin: 15px auto 0;
+  padding: 5px;
+  padding-bottom: 15px;
+  color: #555497ff;
+}
+
+.title-exit h2 {
+  margin: 0;
 }
 
 .exit-settings-btn {
   cursor: pointer;
+  font-weight: bolder;
+  font-size: 1.2em;
+}
+
+.timer-settings h2 {
+  color: #121B67ff;
+  font-size: 1.6em;
+}
+
+input[type="number"] {
+  width: 30%;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(85, 84, 151, 0.34);
+  font-weight: bold;
+  font-size: 0.97em;
+  color: #121B67ff;
 }
 
 .timers {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   align-content: center;
-  gap: 0.2em;
-  padding: 5px 5px 30px;
-  border-bottom: 1px solid gray;
+  gap: 1em;
+  padding: 5px 5px 20px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.328);
   width: 90%;
   margin: auto;
 }
-.cycles-timer {}
+
+.pomodoro-timer h4, .short-timer h4, .long-timer h4, .cycles-timer h4 {
+  font-size: 1.1em;
+  margin: 15px;
+  color: rgba(18, 27, 103, 0.902);
+}
 
 .save {
-  margin: 30px 0 10px 80% ;
+  margin: 20px auto;
+  font-size: 1.1em;
+  background-color:  rgba(85, 84, 151, 0.443);
+  color: #121B67ff;
+  border: none;
+  font-weight: bolder;
+  box-shadow: none;
+}
+
+.save:active {
+  border: none;
 }
 
 .completed-task-display{
@@ -296,21 +374,60 @@ li span {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
   border-radius: 20px;
-  width: 30%;
-  height: 35%;
+  width: 600px;
+  height: 300px;
   padding: 10px;
   margin: 10px auto ;
   background-color: white;
   position: absolute;
-  bottom: 25%;
-  left: 35%;
+  top: 15vh;
+  left: 32%;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.204);
   display: none;
+}
+
+.completed-task-display h2 {
+  color: #555497ff;
+}
+
+.completed-task-display h3 {
+  color: #121B67ff
+}
+
+.yes-no-btns {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+  
+}
+
+.yes-btn , .no-btn, .cont-work-btn {
+  margin: 15px auto 15px;
+  font-size: 1.1em;
+  background-color:  rgba(85, 84, 151, 0.34);
+  color: #121B67ff;
+  border: none;
+  font-weight: bolder;
+  box-shadow: none;
+  width: 50px;
+}
+
+.yes-btn:active , .no-btn:active, .cont-work-btn:active {
+  border: none;
 }
 
 .uncompleted-task {
   display: none;
+}
+
+.uncompleted-task input[type='number'] {
+  width: 15%;
+}
+
+.cont-work-btn {
+  margin: 0;
+  width: 100px;
 }
 
 
@@ -318,19 +435,76 @@ li span {
   width: 80%;
   height: 20px;
   margin: 20px auto;
-  background-color: black;
+  background-color: rgba(255, 255, 255, 0.995);
   border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.438);
 }
 
 .progess-bar {
   width: 0;
   height: 20px;
-  background-color: white;
+  background-color: #33377Fff;
   border-radius: 10px;
 }
 
 .reset-all-cont {
   text-align: center;
-  width: 50%;
-  margin: auto;
+  width: 30%;
+  margin: 20px auto;
+}
+
+.reset-all {
+  width: 100%;
+}
+
+
+@media only screen and (max-width: 900px) {
+
+  .pomodoro-tasks {
+    padding: 8px 1.5em;
+  }
+
+  .pomodoro-status {
+    padding: 10px 15px;
+    gap: 0.8em;
+  }
+
+  .settings-display {
+    width: 450px;
+    height: 410px;
+    margin: 0 auto ;
+    left: 25%;
+  
+  }
+
+  .completed-task-display{
+    width: 550px;
+    height: 330px;
+    top: 18vh;
+    left: 20%;
+  }
+}
+
+@media only screen and (max-width: 830px) {
+  input[type="number"] {
+    font-size: small;
+  }
+
+  .timer-settings h2 {
+    font-size: 1.2em;
+  }
+  .pomodoro-timer h4, .short-timer h4, .long-timer h4, .cycles-timer h4 {
+    font-size: smaller;
+  }
+
+  .settings-display {
+    width: 350px;
+    height: 550px;
+  }
+
+  .completed-task-display{
+    width: 400px;
+    height: 415px;
+    left: 15%;
+  }
 }

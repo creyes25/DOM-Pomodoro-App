@@ -353,10 +353,9 @@ function statusDisplay(currentStatus) {
 // styles the status element to be displayed
 function statusStyling(currentStatus) {
   currentStatus.style.textDecoration = 'underline'
-  currentStatus.style.border = '1px solid blue'
   currentStatus.style.borderRadius = '15px'
-  currentStatus.style.padding = '15px'
-
+  currentStatus.style.padding = '8px 12px'
+  currentStatus.style.backgroundColor = 'rgba(85, 84, 151, 0.975)'
 }
 
 // removes styling on status that is not current
@@ -366,11 +365,11 @@ function removeStatusStyling(...statuses) {
     status.style.removeProperty('border')
     status.style.removeProperty('border-radius')
     status.style.removeProperty('padding')
+    status.style.removeProperty('background-color')
   })
 }
 
 // progress bar
-
 function progressBar(initialTime, currentTime) {
   const percentage = ((initialTime - currentTime)/ initialTime) * 100
 
