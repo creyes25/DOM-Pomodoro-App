@@ -44,7 +44,6 @@ function displayAllTasks() {
     const startTask = $('div', 'run-btn')
     const deleteBtn = $('div', 'delete-btn')
     
-    
     taskName.innerHTML = task.name
     startTask.innerHTML = 'Run'
     deleteBtn.innerHTML = '🗑️'
@@ -63,7 +62,6 @@ function displayAllTasks() {
       
       activeTasks.appendChild(li)
     }
-    
   })
 }
 
@@ -99,7 +97,6 @@ window.addEventListener('click', e => {
   const className = e.target.className
   const updatedTaskList = []
   
-
   // handles checkboxes of task
   if (className === 'checkbox') {
     const taskCont = parseInt(e.target.parentNode.className)
@@ -119,7 +116,6 @@ window.addEventListener('click', e => {
       if (task.id === taskCont) {
         currentTask.setAttribute('id', `${task.id}`)
         currentTask.innerHTML = task.name
-        
       }
     })
   }
@@ -128,7 +124,6 @@ window.addEventListener('click', e => {
   if (className === 'delete-btn') {
     const taskCont = parseInt(e.target.parentNode.parentNode.className)
     
-
     taskList.forEach(task => {
       if(task.id !== taskCont) {
         updatedTaskList.push(task)
@@ -144,25 +139,7 @@ window.addEventListener('click', e => {
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Pomodoro
 
 const timerDisplay = document.querySelector('.timerDisplay')
 const pomodoroStatus = document.querySelector('.pomodoro')
@@ -194,12 +171,6 @@ const uncompletedTask = document.querySelector('.uncompleted-task')
 const addCycles = document.querySelector('.add-cycles')
 const continueWorkBtn = document.querySelector('.cont-work-btn')
 
-
-
-
-
-
-// POMODORO
 
 // default values
 const defaultPomodoroTimer = pomodoroInput.value
@@ -256,8 +227,6 @@ function currentTimer() {
 }
 
 
-
-
 // Timer starts the countdown
 function startTimer() {
   
@@ -308,7 +277,6 @@ function startTimer() {
 
   }
 }
-
 
 // resets the current status timer
 function resetTimer() {
@@ -431,7 +399,6 @@ resetAllBtn.addEventListener('click', () => {
   longInput.value = defaultLongTmer
   cyclesInput.value = defaultTotalCycles
 
-
   progressBarChange.style.width = `0%`
 
   isReset = true
@@ -480,7 +447,6 @@ yesBtn.addEventListener('click', () => {
       completedCyclesDisplay.style.display = 'none'
     }
   })
-  
 })
 
 // handles no btn (when task is not completed after tasks)
