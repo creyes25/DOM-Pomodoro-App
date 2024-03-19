@@ -81,6 +81,19 @@ addBtn.addEventListener('click', () => {
   displayAllTasks()
 })
 
+// when user presses on enter key inside the input field
+inputTask.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter') {
+    if (e.target.value === '') return;
+    const inputValue = inputTask.value
+    createNewTask(inputValue)
+    inputTask.value = ''
+    // call function to display the new task
+    displayAllTasks()
+  }
+
+})
+
 // handles the selected task on the list
 window.addEventListener('click', e => {
   const className = e.target.className
@@ -343,8 +356,8 @@ function statusDisplay(currentStatus) {
     case 'long':
       statusStyling(longBreakStatus)
       removeStatusStyling(shortBreakStatus, pomodoroStatus)
-      
       break;
+
     default:
       break;
   }
