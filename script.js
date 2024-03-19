@@ -273,7 +273,7 @@ function startTimer() {
         timer = currentTimer()
         startTimer()
       }
-    }, 50)
+    }, 1000)
 
   }
 }
