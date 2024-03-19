@@ -215,6 +215,7 @@ const defaultTimerSettings = {
   totalCycles: defaultTotalCycles,
   currentStatus : 'pomodoro'
 }
+
 let timerInSeconds, shortBreakInSec, longBreakInSec, totalCycles, currentStatus
 let initialCycle, initialTime
 let minutes, seconds
@@ -424,12 +425,20 @@ resetAllBtn.addEventListener('click', () => {
   defaultTimerSettings.shortBreak = defaultShortTimer
   defaultTimerSettings.totalCycles = defaultTotalCycles
 
+  // set default timer in settings display
+  pomodoroInput.value = defaultPomodoroTimer
+  shortInput.value = defaultShortTimer
+  longInput.value = defaultLongTmer
+  cyclesInput.value = defaultTotalCycles
+
+
   progressBarChange.style.width = `0%`
 
   isReset = true
   disableBtns(false)
 
   if(isPaused) resetTimer()
+  resetTimer()
   
 })
 
